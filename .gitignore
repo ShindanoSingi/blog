@@ -7,6 +7,8 @@
 .history
 .env
 
+myText.txt
+
 # testing
 /coverage
 
