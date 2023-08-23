@@ -3,7 +3,7 @@ import { addDoc, collection } from 'firebase/firestore';
 import { auth, db } from '../firebase-config';
 import { useNavigate } from 'react-router-dom';
 
-const CreatePost = () => {
+const CreatePost = ({ isAuth }) => {
 	const [title, setTitle] = useState('');
 	const [postTitle, setPostTitle] = useState('');
 
@@ -33,9 +33,15 @@ const CreatePost = () => {
 		}
 	};
 
+	useEffect(() => {
+		if (!isAuth) {
+			navigate('/login');
+		}
+	}, []);
+
 	return (
 		<div className="container">
-			<div className="bg-light p-5 rounded mt-3">
+			<div className="bg-light p-5 rounded">
 				<h1>Create Post</h1>
 				<div className="mb-3">
 					<label htmlFor="title" className="form-label">
