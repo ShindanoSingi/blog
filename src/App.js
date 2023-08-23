@@ -8,6 +8,7 @@ import { auth } from './firebase-config';
 
 function App() {
 	const [isAuth, setIsAuth] = useState(false);
+	const [getPosts, setGetPosts] = useState(false);
 
 	const signUserOut = () => {
 		signOut(auth).then(() => {
@@ -25,7 +26,7 @@ function App() {
 						Home
 					</Link>
 
-					{isAuth === false ? (
+					{!localStorage.getItem('auth') ? (
 						<Link to="/login" className="nav-link text-white mx-2">
 							{' '}
 							Login
@@ -45,10 +46,10 @@ function App() {
 
 				<div className="container mt-5">
 					<Routes>
-						<Route path="/" element={<Home />} />
+						<Route path="/" element={<Home isAuth={isAuth} />} />
 						<Route
 							path="/create-post"
-							element={<CreatePost isAuth={isAuth} />}
+							element={<CreatePost isAuth={isAuth} getPosts={getPosts} />}
 						/>
 						<Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
 					</Routes>
