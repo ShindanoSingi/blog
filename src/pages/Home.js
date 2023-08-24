@@ -33,7 +33,10 @@ function Home() {
 
 	// Edit post
 	const editPost = async (id) => {
-		await updateDoc(doc(db, 'posts', id));
+		await updateDoc(doc(db, 'posts', id), {
+			title,
+			postTitle,
+		});
 		getPosts();
 	};
 
@@ -56,7 +59,7 @@ function Home() {
 			{showEditForm === true ? (
 				<div className="container position-absolute z-index-10">
 					<div className="bg-light p-5 rounded">
-						<h1>Create Post</h1>
+						<h1>Edit Post</h1>
 						<div className="mb-3">
 							<label htmlFor="title" className="form-label">
 								Title
@@ -82,7 +85,7 @@ function Home() {
 						<button
 							className="btn btn-dark"
 							onClick={() => {
-								// editPost(post.id);
+								editPost(postId);
 								setShowEditForm(false);
 								// setPostId(post.id);
 								console.log(showEditForm);
@@ -106,7 +109,7 @@ function Home() {
 										onClick={() => {
 											// editPost(post.id);
 											setShowEditForm(true);
-											// setPostId(post.id);
+											setPostId(post.id);
 											console.log(showEditForm);
 										}}
 									>
